@@ -70,6 +70,7 @@ else:
         weight_file = '../weights/%s_weights.hdf5' % params['embed_type']
 
     dataset_file = '/storage/jalverio/bioelmo_input.txt'
+    print('I AM USING THE DATASET FILE', dataset_file)
 
     embedding_file = 'caches_%s/elmo_embeddings.hdf5' % params['embed_type']
     dump_bilm_embeddings(
