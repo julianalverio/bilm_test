@@ -22,7 +22,7 @@ def w2v(tokens):
     return _output
 
 parser = argparse.ArgumentParser(description='Cache dataset')
-parser.add_argument('--embed_type', dest='embed_type', type=str, help='Cache the specified embedding type of the dataset. Possible types: "biomed_elmo", "biomed_w2v", "general_elmo"')
+parser.add_argument('--embed_type', dest='embed_type', type=str, default='biomed_elmo', help='Cache the specified embedding type of the dataset. Possible types: "biomed_elmo", "biomed_w2v", "general_elmo"')
 
 args = parser.parse_args()
 params = vars(args)
@@ -53,6 +53,7 @@ if params['embed_type'] == 'biomed_w2v':
 else:
     dataset_file = 'caches_%s/dataset_file.txt' % params['embed_type']
 
+
     with open(dataset_file, 'w') as fout:
         for sent_id in list(train):
             sentence = train[sent_id]['sent'] # List[Tokens]
@@ -67,6 +68,8 @@ else:
         vocab_file = '../dict/vocabulary.txt'
         options_file = '../weights/%s_options.json' % params['embed_type']
         weight_file = '../weights/%s_weights.hdf5' % params['embed_type']
+
+    dataset_file = '/storage/jalverio/bioelmo_input.txt'
 
     embedding_file = 'caches_%s/elmo_embeddings.hdf5' % params['embed_type']
     dump_bilm_embeddings(
